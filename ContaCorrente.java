@@ -5,30 +5,44 @@ public class ContaCorrente {
     int agencia; 
     double limite; 
 
-    void sacar (double valor){
-        if (saldo >= valor) {
+    public boolean sacar (double valor){
+        if (valor > 0 && saldo >= valor) {
         saldo = saldo - valor;
-        System.out.println("Saque realizado! Saldo: " + saldo);
-    } else {
-        System.out.println("Saldo insuficiente!");
+        return true; 
+    } 
+         return false; 
+        
     }
        
 
-    }
-    void depositar (double valor){
-        saldo = saldo + valor;
-        System.out.println("Deposito realizado! Saldo : "+ saldo); 
+    
+    public boolean depositar(double valor){
+        if(valor > 0){
+            saldo = saldo + valor ; 
+            return true; 
+
+        }
+        return false; 
+      
 
 
-
-    }
-    void transferir (double valor){
-        if (saldo >= valor) {
-        saldo -= valor;
-        System.out.println("Transferencia realizada! Saldo: " + saldo);
-    } else {
-        System.out.println("Saldo insuficiente!");
     }
 
+    public boolean depositar (double valor){
+        if (valor > 0) {
+        saldo = saldo + valor; 
+        return true; 
+       
+    } 
+    return false; 
+  
+    }
+
+    public boolean transferir (double valor, ContaCorrente destino) {
+        if (sacar(valor)) {
+            destino.depositar(valor); 
+            return true; 
+        }
+        return false; 
     }
 }
